@@ -1,0 +1,13 @@
+# Build and dist folders
+build/
+dist/
+
+# PyInstaller files
+*.spec
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Temp files
+*.tmp
