@@ -1,19 +1,41 @@
-# راهنمای مدیریت دانلود استیم (Steam Download Manager)
+# Steam Download Manager PRO 🎮
 
-این پوشه شامل ابزارهای مسدودسازی دانلودهای استیم برای گیم‌نت‌هاست. ما هم نسخه خط فرمان (`.bat`) و هم نسخه گرافیکی مدرن با پایتون داریم.
+A smart, lightweight GUI tool specifically designed for Game Centers and PC cafes to easily block and unblock Steam Workshop and background game downloads, preventing unwanted data usage and bandwidth drain.
 
-## ۱. نسخه گرافیکی زیبا (پایتون) - جدید
-نسخه جدید شامل یک رابط کاربری مدرن است که با استفاده از کتابخانه `customtkinter` پایتون نوشته شده.
+<p align="center">
+  <img src="icon.png" width="150" alt="Logo">
+</p>
 
-### ساخت نرم‌افزار نصبی (`.exe`):
-1. مطمئن شوید که پایتون روی سیستم نصب است.
-2. روی فایل `build_exe.bat` دوبار کلیک کنید.
-3. این اسکریپت به صورت خودکار کتابخانه‌های مورد نیاز را دانلود کرده و فایل پایتون را تبدیل به یک فایل `.exe` مستقل می‌کند.
-4. فایل نهایی داخل پوشه `dist` ساخته می‌شود که می‌توانید آن را روی هر سیستمی کپی و اجرا کنید (بدون نیاز به نصب پایتون).
+## 🌟 Features
+- **Block/Unblock Workshop Downloads:** Stop automatic mod and map updates that consume high bandwidth.
+- **Block/Unblock All Game Updates:** Prevent games from updating in the background while still allowing already installed games to run normally.
+- **Smart Status Detection:** Live monitoring of directory permissions indicating if downloads are currently `Blocked 🔴` or `Active 🟢`.
+- **Premium GUI:** Built with `customtkinter` for a modern, dark-themed user interface.
+- **Portable & Fast-Loading:** One-click execution without the need for extraction delays.
 
-## ۲. نسخه متنی (Batch Script)
-اگر نمی‌خواهید از نرم‌افزار پایتون استفاده کنید، فایل `Steam_Workshop_Blocker.bat` همان کارهای قبلی را به صورت خط فرمان انجام می‌دهد (هم مسدودسازی ورک‌شاپ و هم کل بازی‌ها).
+## 🚀 How It Works
+The application works by modifying the Windows directory permissions (`icacls`) for specific Steam folders:
+- `steamapps/workshop/downloads`
+- `steamapps/downloading`
 
-## 🛠 نکات برای توسعه‌دهنده بعدی:
-- اسکریپت پایتون `gui_app.py` از ماژول `winreg` برای یافتن مسیر استیم، `customtkinter` برای رابط کاربری، و `subprocess` برای اجرای دستور `icacls` در پس‌زمینه (با `CREATE_NO_WINDOW`) استفاده می‌کند.
-- روش مسدودسازی همان اعمال `(W,WD,AD)` روی `Everyone` در پوشه‌های دانلود است.
+By denying write permissions (`W,WD,AD`), Steam is physically prevented from downloading updates, effectively saving data.
+
+## 🛠️ Installation & Build
+To build the `.exe` file from the source code, simply run:
+```bat
+build_exe.bat
+```
+This will:
+1. Install necessary Python dependencies (`customtkinter`, `pyinstaller`, `Pillow`).
+2. Convert `icon.png` to an `.ico` file.
+3. Build the application using PyInstaller for instant loading speed.
+4. Output the ready-to-use software in the `dist/Steam_Manager_Pro` directory.
+
+## 📖 Usage
+1. Open `Steam_Manager_Pro.exe` as **Administrator**.
+2. Verify or browse for your Steam library path.
+3. Click **Block** to stop downloads, or **Unblock** to resume normal Steam behavior.
+
+## ⚠️ Notes for Developers
+- Ensure the application is run with Administrator privileges, otherwise the `icacls` commands will throw a `PermissionError`.
+- If the icon fails to apply in Windows Explorer, it is due to the Windows icon cache. The current build script circumvents this by generating a fresh output directory.
